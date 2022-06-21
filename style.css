@@ -1,0 +1,296 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Varela+Round&display=swap");
+:root {
+  --border--radius: 15px;
+  --color-deep-coral: rgb(252, 106, 53);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Varela Round", sans-serif;
+}
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+section {
+  padding: 5rem 10%;
+}
+section:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+section .container .title {
+  margin-bottom: 3rem;
+}
+section .container .title h4 {
+  font-size: 1.5rem;
+  color: var(--color-deep-coral);
+
+  position: relative;
+}
+section .container .title h2 {
+  font-size: 3rem;
+}
+/* -----------------------------헤더------------------- */
+header {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+}
+header .container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header button {
+  color: white;
+}
+header h1 > button {
+  font-size: 2rem;
+  font-weight: bold;
+}
+header nav ul {
+  display: flex;
+}
+header nav ul li {
+  padding: 10px;
+}
+
+header nav ul li button {
+  font-size: 1.2rem;
+}
+
+/* ---------------------------헤더------------------- */
+
+/* ---------------welcome------------------ */
+section#welcome {
+  width: 100%;
+  height: 100vh;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/main.jpg") center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section#welcome .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 2px;
+  text-align: center;
+}
+section#welcome .container * {
+  margin: 10px;
+}
+section#welcome .container h4 {
+  font-size: 2rem;
+}
+
+section#welcome .container h2 {
+  font-size: 3.5rem;
+}
+section#welcome .container h2 span::after {
+  display: inline-block;
+  content: "";
+  height: 3rem;
+  width: 3px;
+  background-color: white;
+  animation: blink 0.5s infinite alternate cubic-bezier(1, -1, 0, 2);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+section#welcome .container p {
+  max-width: 500px;
+}
+button.download {
+  color: inherit;
+  border-radius: 5px;
+  border: 3px solid white;
+}
+button.mouse {
+  position: absolute;
+  bottom: 0;
+  color: inherit;
+  font-size: 2rem;
+  animation: jump 1s infinite alternate;
+}
+
+@keyframes jump {
+  0% {
+    bottom: 1rem;
+  }
+  100% {
+    bottom: 3rem;
+  }
+}
+/* ---------------welcome------------------ */
+
+/* ------------about--------------- */
+
+section#about .container .contents {
+  display: flex;
+  justify-content: space-between;
+}
+section#about .container .contents .left {
+  width: 47%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.077);
+}
+section#about .container .contents .left img {
+  width: 100%;
+}
+section#about .container .contents .right {
+  width: 47%;
+}
+section#about .container p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.social {
+  font-size: 2.5rem;
+}
+/* ------------about--------------- */
+
+/* -----------skills--------------- */
+section#skills i {
+  font-size: 35px;
+  display: block;
+  color: var(--color-deep-coral);
+}
+section#skills .container .contents {
+  background-color: rgba(128, 128, 128, 0.11);
+  border-radius: var(--border--radius);
+}
+section#skills .container .contents ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+section#skills .container .contents ul li {
+  padding: 15px;
+  width: 200px;
+  min-height: 200px;
+  background-color: rgba(70, 36, 36, 0.241);
+  margin: 30px;
+  border-radius: var(--border--radius);
+}
+section#skills .container .contents ul li > * {
+  margin-bottom: 10px;
+}
+/* ------------중간 backGround------------------ */
+.backGround {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/main.jpg") center/cover;
+  width: 100%;
+  height: 400px;
+  background-attachment: fixed;
+}
+/* ------------중간 backGround------------------ */
+
+/* ------------------projects------------------------- */
+section#projects .container .contents {
+  background-color: rgba(128, 128, 128, 0.11);
+  border-radius: var(--border--radius);
+}
+section#projects .container .contents > ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+section#projects .container .contents > ul > li {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 400px;
+  height: 450px;
+  background-color: rgba(70, 36, 36, 0.241);
+  margin: 30px;
+  border-radius: var(--border--radius);
+}
+section#projects .container .contents ul li > * {
+  margin-bottom: 10px;
+}
+section#projects .container .contents ul li img {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+section#projects .container .contents ul li ul {
+  display: flex;
+}
+section#projects i {
+  margin: 5px;
+  font-size: 35px;
+  display: block;
+  color: var(--color-deep-coral);
+}
+
+/*----------------------contact-------------------------- */
+section#contact ul {
+  display: flex;
+  flex-direction: column;
+}
+
+section#contact ul li {
+  background-color: antiquewhite;
+}
+
+section#contact .contents li {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.351);
+  margin-bottom: 10px;
+  height: 80px;
+  max-width: 600px;
+  border-radius: 10px;
+}
+section#contact li > div {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+section#contact li > div > i {
+  margin-right: 10px;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 50px;
+}
+section#contact li > div h3 {
+  margin-bottom: 5px;
+}
+section#contact button {
+  font-size: 2rem;
+  margin-right: 5px;
+}
