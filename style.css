@@ -1,7 +1,21 @@
+/* ----------------common---------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Varela+Round&display=swap");
 :root {
   --border--radius: 15px;
   --color-deep-coral: rgb(252, 106, 53);
+  --color-warm-white: rgb(255, 255, 255);
+  --color-light-gray: rgb(235, 235, 235);
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./images/main.jpg") center / cover;
+  z-index: -1;
 }
 * {
   margin: 0;
@@ -19,6 +33,17 @@ a:visited {
 li {
   list-style: none;
 }
+h1 {
+}
+h2 {
+  font-size: 3rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.25em;
+}
 
 button {
   background-color: transparent;
@@ -26,34 +51,43 @@ button {
   cursor: pointer;
 }
 section {
-  padding: 5rem 10%;
+  padding: 0;
+  background-color: var(--color-warm-white);
+  /* justify-content: center;
+  display: flex; */
 }
 section:nth-child(2n) {
-  background-color: #f8f8f8;
+  background-color: var(--color-light-gray);
+}
+
+section.short {
+  margin-bottom: 250px;
 }
 
 section .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
+  padding: 5%;
+  padding-top: 5rem;
 }
 section .container .title {
   margin-bottom: 3rem;
 }
 section .container .title h4 {
-  font-size: 1.5rem;
   color: var(--color-deep-coral);
-
-  position: relative;
 }
 section .container .title h2 {
-  font-size: 3rem;
 }
+/* ----------------common---------------------- */
+
 /* -----------------------------헤더------------------- */
 header {
   width: 100%;
+  height: 4.5rem;
   padding: 1rem;
-  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
+  z-index: 1;
 }
 header .container {
   width: 100%;
@@ -78,16 +112,15 @@ header nav ul li {
 header nav ul li button {
   font-size: 1.2rem;
 }
-
+/*  자바스크립트로 1페이지 이외에는 헤더 숨기기+ 마우스 호버시 등장하도록 만들기*/
 /* ---------------------------헤더------------------- */
 
 /* ---------------welcome------------------ */
 section#welcome {
-  width: 100%;
+  /* width: 100%; */
+  background-color: transparent;
   height: 100vh;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("../images/main.jpg") center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,13 +135,7 @@ section#welcome .container {
 section#welcome .container * {
   margin: 10px;
 }
-section#welcome .container h4 {
-  font-size: 2rem;
-}
 
-section#welcome .container h2 {
-  font-size: 3.5rem;
-}
 section#welcome .container h2 span::after {
   display: inline-block;
   content: "";
@@ -160,13 +187,12 @@ section#about .container .contents {
 }
 section#about .container .contents .left {
   width: 47%;
+  height: 350px;
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.077);
+  background: url("./images/main.jpg") center/cover;
 }
-section#about .container .contents .left img {
-  width: 100%;
-}
+
 section#about .container .contents .right {
   width: 47%;
 }
@@ -187,38 +213,36 @@ section#skills i {
   color: var(--color-deep-coral);
 }
 section#skills .container .contents {
-  background-color: rgba(128, 128, 128, 0.11);
+  background-color: rgb(255, 255, 255);
   border-radius: var(--border--radius);
+  padding: 15px 15px;
 }
-section#skills .container .contents ul {
+section#skills .container .contents ul#icons {
+  display: none;
+}
+
+section#skills .container .contents ul#skillLists {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
 }
-section#skills .container .contents ul li {
+section#skills .container .contents ul#skillLists li {
   padding: 15px;
   width: 200px;
   min-height: 200px;
-  background-color: rgba(70, 36, 36, 0.241);
-  margin: 30px;
+  margin: 30px 15px;
+  background-color: var(--color-light-gray);
   border-radius: var(--border--radius);
 }
-section#skills .container .contents ul li > * {
+section#skills .container .contents ul#skillLists li > * {
   margin-bottom: 10px;
 }
-/* ------------중간 backGround------------------ */
-.backGround {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("../images/main.jpg") center/cover;
-  width: 100%;
-  height: 400px;
-  background-attachment: fixed;
-}
-/* ------------중간 backGround------------------ */
+/* -----------skills--------------- */
 
 /* ------------------projects------------------------- */
 section#projects .container .contents {
-  background-color: rgba(128, 128, 128, 0.11);
+  background-color: rgba(128, 128, 128, 0.9);
+  background-color: var(--color-light-gray);
   border-radius: var(--border--radius);
 }
 section#projects .container .contents > ul {
@@ -232,7 +256,8 @@ section#projects .container .contents > ul > li {
   padding: 15px;
   width: 400px;
   height: 450px;
-  background-color: rgba(70, 36, 36, 0.241);
+  /* background-color: rgba(70, 36, 36, 0.241); */
+  background-color: var(--color-warm-white);
   margin: 30px;
   border-radius: var(--border--radius);
 }
@@ -266,13 +291,14 @@ section#contact ul li {
 }
 
 section#contact .contents li {
-  padding: 10px;
+  padding: 10px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(128, 128, 128, 0.351);
+  background-color: var(--color-warm-white);
   margin-bottom: 10px;
-  height: 80px;
+  /* height: 90px; */
   max-width: 600px;
   border-radius: 10px;
 }
@@ -282,15 +308,69 @@ section#contact li > div {
   align-items: center;
 }
 section#contact li > div > i {
-  margin-right: 10px;
   font-size: 2.5rem;
   text-align: center;
   width: 50px;
+  margin-right: 5px;
 }
-section#contact li > div h3 {
+section#contact li > div > div {
+  width: 80%;
+}
+section#contact li > div h5 {
   margin-bottom: 5px;
 }
 section#contact button {
   font-size: 2rem;
-  margin-right: 5px;
+  /* position: absolute; */
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 565px) {
+  /* ----------------common---------------------- */
+  h5 {
+  }
+  section.short {
+    margin-bottom: 0;
+  }
+  section#contact {
+    margin-bottom: 130px;
+  }
+  /* ----------------common---------------------- */
+
+  /* ------------------header---------------- */
+  header {
+    display: none;
+  }
+  /* ------------------header---------------- */
+
+  /* ----------about------------ */
+  section#about .contents {
+    flex-direction: column;
+    align-items: center;
+  }
+  section#about .container .contents .left {
+    width: 100%;
+    margin-bottom: 15px;
+    /* display: flex;
+    align-items: center;
+    background: url("./images/main.jpg") center/cover; */
+  }
+
+  section#about .container .contents .right {
+    width: 100%;
+  }
+  section#skills .container .contents ul#icons {
+    display: flex;
+  }
+  section#skills .container .contents ul#icons > * {
+    margin-right: 10px;
+  }
+  section#skills .container .contents ul#skillLists {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+  ul#skillLists > li {
+    flex: 0 0 auto;
+  }
 }
