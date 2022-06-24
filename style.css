@@ -138,24 +138,36 @@ section#welcome .container {
 section#welcome .container * {
   margin: 10px;
 }
-
-section#welcome .container h2 span::after {
+section#welcome .container h2 {
+  position: relative;
+  /* min-width: 1px; */
+  min-height: 250px;
+  pointer-events: none;
+}
+section#welcome .container h2.active {
+  pointer-events: initial;
+}
+section#welcome .container h2.blinkOn::after {
   display: inline-block;
+  position: absolute;
+  margin-top: 10px;
+  /* bottom: 10px; */
+
   content: "";
-  height: 3rem;
+  height: 2.5rem;
   width: 3px;
   background-color: white;
-  animation: blink 0.5s infinite alternate cubic-bezier(1, -1, 0, 2);
+  /* animation: blink 0.5s infinite alternate cubic-bezier(1, -1, 0, 2); */
 }
 
-@keyframes blink {
+/* @keyframes blink {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-}
+} */
 section#welcome .container p {
   max-width: 500px;
 }
@@ -218,7 +230,7 @@ section#skills i {
 section#skills .container .contents {
   background-color: rgb(255, 255, 255);
   border-radius: var(--border--radius);
-  padding: 15px 15px;
+
   display: flex;
   flex-direction: column;
 }
@@ -242,7 +254,7 @@ section#skills .container .contents ul#skillLists li {
   padding: 15px;
   width: 210px;
   min-height: 210px;
-  margin: 15px;
+  margin: 10px;
   background-color: var(--color-light-gray);
   border-radius: var(--border--radius);
 }
