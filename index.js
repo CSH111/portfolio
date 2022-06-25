@@ -1,10 +1,18 @@
-const typingBlock = document.querySelector("#welcome .container h2");
+const typingBlock = document.querySelector("#welcome .container span");
+const downArrow = document.querySelectorAll(".down");
+
+// 커서
+function blink() {
+  setInterval(() => typingBlock.classList.toggle("blinkOn"), 300);
+}
+blink();
+
+// 타이핑 효과
 const welcomeMsg = [
   "안녕하세요.",
   "프론트엔드\u00a0개발자\n조성호입니다.",
   "찾아주셔서\n감사합니다.",
 ];
-
 let msgIndex = 0;
 let splitedMsg = welcomeMsg[msgIndex].split("");
 typingBlock.addEventListener("click", reTyping);
@@ -13,13 +21,16 @@ function typing() {
   if (splitedMsg.length > 0) {
     typingBlock.innerText += splitedMsg.shift();
     setTimeout(typing, 50);
+  } else if (msgIndex < welcomeMsg.length - 1) {
+    setTimeout(DeleteTyping, 700);
   } else {
-    setTimeout(DeleteTyping, 1000);
+    typingBlock.classList.add("active"); //클릭시 리타이핑 활성화
+    downArrow[0].classList.add("show"); // 버튼생성
   }
 }
 function DeleteTyping() {
   const splitToDel = typingBlock.innerText.split("");
-  if (splitToDel.length > 0 && msgIndex < welcomeMsg.length - 1) {
+  if (splitToDel.length > 0) {
     splitToDel.pop();
     typingBlock.innerText = splitToDel.join("");
     setTimeout(DeleteTyping, 30);
@@ -28,13 +39,9 @@ function DeleteTyping() {
   }
 }
 function nextType() {
-  if (msgIndex < welcomeMsg.length - 1) {
-    msgIndex += 1;
-    splitedMsg = welcomeMsg[msgIndex].split("");
-    typing();
-  } else {
-    typingBlock.classList.add("active");
-  }
+  msgIndex += 1;
+  splitedMsg = welcomeMsg[msgIndex].split("");
+  typing();
 }
 function reTyping() {
   typingBlock.innerText = "";
@@ -43,9 +50,20 @@ function reTyping() {
   typingBlock.classList.remove("active");
   typing();
 }
-function blink() {
-  setInterval(() => typingBlock.classList.toggle("blinkOn"), 300);
-}
+setTimeout(typing, 1000);
 
-blink();
-typing();
+//페이지 이동
+
+const welcome = document.querySelector("#welcome");
+const about = document.querySelector("#about");
+downArrow.forEach((btn) => btn.addEventListener("click", scroll));
+function scroll(event) {
+  window.scrollBy({
+    top: event.target.parentNode.offsetHeight,
+    left: 0,
+    behavior: "smooth",
+  });
+}
+// 텍스트 입력시 섹션사이즈 왜바뀜?
+// 자동스크롤 + 버튼
+// 스크롤시 마다 사이드네비게이션 쇼
