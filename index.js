@@ -1,7 +1,7 @@
 const typingBlock = document.querySelector("#welcome .container span");
-const downArrow = document.querySelectorAll(".down");
+const downArrow = document.querySelector(".down");
 
-// 커서
+// 커서 깜빡임
 function blink() {
   setInterval(() => typingBlock.classList.toggle("blinkOn"), 300);
 }
@@ -25,7 +25,7 @@ function typing() {
     setTimeout(DeleteTyping, 700);
   } else {
     typingBlock.classList.add("active"); //클릭시 리타이핑 활성화
-    downArrow[0].classList.add("show"); // 버튼생성
+    downArrow.classList.add("show"); // 버튼생성
   }
 }
 function DeleteTyping() {
@@ -52,11 +52,8 @@ function reTyping() {
 }
 setTimeout(typing, 1000);
 
-//페이지 이동
-
-const welcome = document.querySelector("#welcome");
-const about = document.querySelector("#about");
-downArrow.forEach((btn) => btn.addEventListener("click", scroll));
+//페이지 이동 - 1페이지 버튼
+downArrow.addEventListener("click", scroll);
 function scroll(event) {
   window.scrollBy({
     top: event.target.parentNode.offsetHeight,
@@ -64,6 +61,29 @@ function scroll(event) {
     behavior: "smooth",
   });
 }
+
+//페이지 이동 - 스크롤
+const sections = document.querySelectorAll("section");
+sections.forEach((item, index) => {
+  item.addEventListener("wheel", function (event) {
+    event.preventDefault();
+    if (event.wheelDelta < 0 && index !== sections.length - 1) {
+      window.scrollTo({
+        top:
+          window.scrollY +
+          sections[index].nextElementSibling.getBoundingClientRect().top,
+      });
+    } else if (event.wheelDelta > 0 && index !== 0) {
+      window.scrollTo({
+        top:
+          window.scrollY +
+          sections[index].previousElementSibling.getBoundingClientRect().top,
+      });
+    }
+  });
+});
+
+//scroll to top selectAll 인덱스*height
 // 텍스트 입력시 섹션사이즈 왜바뀜?
 // 자동스크롤 + 버튼
 // 스크롤시 마다 사이드네비게이션 쇼
