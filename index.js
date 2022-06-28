@@ -53,6 +53,8 @@ function reTyping() {
 setTimeout(typing, 1000);
 
 //페이지 이동 - 1페이지 버튼
+const ul = document.querySelector("header ul");
+
 downArrow.addEventListener("click", scroll);
 function scroll(event) {
   window.scrollBy({
@@ -60,9 +62,11 @@ function scroll(event) {
     left: 0,
     behavior: "smooth",
   });
+  ul.classList.add("show");
 }
 
 //페이지 이동 - 스크롤
+
 const sections = document.querySelectorAll("section");
 sections.forEach((item, index) => {
   item.addEventListener("wheel", function (event) {
@@ -91,7 +95,7 @@ window.addEventListener("scroll", () => {
     timer = setTimeout(function () {
       timer = null;
       test();
-    }, 100);
+    }, 200);
   }
 });
 
@@ -102,7 +106,6 @@ function test() {
       section.getBoundingClientRect().top < 100 &&
       section.getBoundingClientRect().top > -100
     ) {
-      console.log(window.scrollY);
       lists.forEach((list) => {
         list.classList.remove("active");
         if (section.id === list.dataset.indicate) {
@@ -110,8 +113,5 @@ function test() {
         }
       });
     }
-    // if (section.offsetTop - window.scrollY < 50) {
-    //   console.log(section.id);
-    // }
   });
 }

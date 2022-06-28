@@ -93,39 +93,79 @@ section .container .title h2 {
 
 /* -----------------------------헤더------------------- */
 header {
-  width: 100%;
-  height: 4.5rem;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.5);
+}
+header nav {
   position: fixed;
-  z-index: 1;
-  /* display: none; */
-}
-header .container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-header a {
-  color: white;
-}
-header h1 > button {
-  font-size: 2rem;
-  font-weight: bold;
+  z-index: 10;
+  right: 5%;
+  top: 5%;
 }
 header nav ul {
-  display: flex;
+  transition: all 0.5s;
+  display: inline-flex;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+  transform: translate(0, -200%);
+  opacity: 0;
+  transform: translate(0);
+  opacity: 1;
 }
-header nav ul li:nth-child(n).active {
-  background-color: bisque;
+header nav ul.show {
+  opacity: 1;
+  transform: scale(1);
 }
 header nav ul li {
-  padding: 10px;
 }
-
+header nav ul li:hover span:nth-child(n) {
+  opacity: 1;
+}
 header nav ul li a {
   font-size: 1.2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  position: relative;
+}
+header nav ul li a span {
+  background-color: rgb(14, 118, 118);
+  opacity: 0;
+  transition: all 0.3s;
+  padding: 5px 10px;
+  position: relative;
+  left: 15px;
+
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+}
+header nav ul li a span::after {
+  content: "";
+  border: solid;
+  border-width: 5px 5px 5px 7px;
+  border-color: transparent transparent transparent rgb(14, 118, 118);
+
+  position: absolute;
+  right: 0;
+  transform: translate(100%, 0);
+}
+header nav ul li.active span,
+header nav ul li:hover span {
+  opacity: 1;
+  left: -20px;
+}
+header nav ul li a::after {
+  z-index: 100;
+  transition: all 0.3s;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: blueviolet;
+}
+
+header nav ul li.active a::after {
+  background-color: bisque;
 }
 button.down {
   position: absolute;
@@ -356,9 +396,7 @@ section#contact button {
   /* ----------------common---------------------- */
 
   /* ------------------header---------------- */
-  header {
-    display: none;
-  }
+
   /* ------------------header---------------- */
   /* welcom--------------- */
   section#home .container {
