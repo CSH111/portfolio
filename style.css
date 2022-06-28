@@ -89,6 +89,8 @@ section .container .title h2 {
 }
 /* ----------------common---------------------- */
 
+/* nav */
+
 /* -----------------------------헤더------------------- */
 header {
   width: 100%;
@@ -114,6 +116,9 @@ header h1 > button {
 }
 header nav ul {
   display: flex;
+}
+header nav ul li:nth-child(n).active {
+  background-color: bisque;
 }
 header nav ul li {
   padding: 10px;
@@ -147,11 +152,11 @@ button.down.show {
 /*  자바스크립트로 1페이지 이외에는 헤더 숨기기+ 마우스 호버시 등장하도록 만들기*/
 /* ---------------------------헤더------------------- */
 
-/* ---------------welcome------------------ */
-section#welcome {
+/* ---------------home------------------ */
+section#home {
   color: white;
 }
-section#welcome .container {
+section#home .container {
   background-color: transparent;
   display: flex;
   justify-content: center;
@@ -159,7 +164,7 @@ section#welcome .container {
   height: 0px;
 }
 
-section#welcome .container span {
+section#home .container span {
   /* position: relative; */
   width: 100%;
   word-break: break-all;
@@ -167,10 +172,10 @@ section#welcome .container span {
   pointer-events: none;
   text-align: center;
 }
-section#welcome .container span.active {
+section#home .container span.active {
   pointer-events: initial;
 }
-section#welcome .container span.blinkOn::after {
+section#home .container span.blinkOn::after {
   position: absolute;
   margin-top: 4px;
   content: "";
@@ -179,7 +184,7 @@ section#welcome .container span.blinkOn::after {
   background-color: white;
 }
 
-/* ---------------welcome------------------ */
+/* ---------------home------------------ */
 
 /* ------------about--------------- */
 
@@ -356,13 +361,13 @@ section#contact button {
   }
   /* ------------------header---------------- */
   /* welcom--------------- */
-  section#welcome .container {
+  section#home .container {
     display: flex;
 
     align-items: center;
   }
 
-  section#welcome .container p {
+  section#home .container p {
     font-size: 2.5rem;
 
     pointer-events: none;

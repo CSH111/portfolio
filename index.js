@@ -1,4 +1,4 @@
-const typingBlock = document.querySelector("#welcome .container span");
+const typingBlock = document.querySelector("#home .container span");
 const downArrow = document.querySelector(".down");
 
 // 커서 깜빡임
@@ -67,6 +67,7 @@ const sections = document.querySelectorAll("section");
 sections.forEach((item, index) => {
   item.addEventListener("wheel", function (event) {
     event.preventDefault();
+
     if (event.wheelDelta < 0 && index !== sections.length - 1) {
       window.scrollTo({
         top:
@@ -83,7 +84,34 @@ sections.forEach((item, index) => {
   });
 });
 
-//scroll to top selectAll 인덱스*height
-// 텍스트 입력시 섹션사이즈 왜바뀜?
-// 자동스크롤 + 버튼
-// 스크롤시 마다 사이드네비게이션 쇼
+//인디케이터
+let timer;
+window.addEventListener("scroll", () => {
+  if (!timer) {
+    timer = setTimeout(function () {
+      timer = null;
+      test();
+    }, 100);
+  }
+});
+
+function test() {
+  const lists = document.querySelectorAll("nav ul li");
+  sections.forEach((section) => {
+    if (
+      section.getBoundingClientRect().top < 100 &&
+      section.getBoundingClientRect().top > -100
+    ) {
+      console.log(window.scrollY);
+      lists.forEach((list) => {
+        list.classList.remove("active");
+        if (section.id === list.dataset.indicate) {
+          list.classList.add("active");
+        }
+      });
+    }
+    // if (section.offsetTop - window.scrollY < 50) {
+    //   console.log(section.id);
+    // }
+  });
+}
