@@ -53,7 +53,6 @@ function reTyping() {
 setTimeout(typing, 1000);
 
 //페이지 이동 - 1페이지 버튼
-const ul = document.querySelector("header ul");
 
 downArrow.addEventListener("click", scroll);
 function scroll(event) {
@@ -62,7 +61,6 @@ function scroll(event) {
     left: 0,
     behavior: "smooth",
   });
-  ul.classList.add("show");
 }
 
 //페이지 이동 - 스크롤
@@ -89,22 +87,13 @@ sections.forEach((item, index) => {
 });
 
 //인디케이터
-let timer;
-window.addEventListener("scroll", () => {
-  if (!timer) {
-    timer = setTimeout(function () {
-      timer = null;
-      test();
-    }, 200);
-  }
-});
-
-function test() {
+function indicate() {
+  const sections = document.querySelectorAll("section");
   const lists = document.querySelectorAll("nav ul li");
   sections.forEach((section) => {
     if (
       section.getBoundingClientRect().top < 100 &&
-      section.getBoundingClientRect().top > -100
+      section.getBoundingClientRect().top > -300
     ) {
       lists.forEach((list) => {
         list.classList.remove("active");
@@ -115,3 +104,68 @@ function test() {
     }
   });
 }
+//인디케이터 디바운싱
+function indi() {
+  let timer_indi;
+  const ul = document.querySelector("header ul");
+  window.addEventListener("scroll", (event) => {
+    if (timer_indi) {
+      clearTimeout(timer_indi);
+    }
+    timer_indi = setTimeout(() => {
+      indicate();
+    }, 50);
+  });
+}
+indi();
+//쓰로틀링
+let timer;
+window.addEventListener("scroll", () => {
+  if (!timer) {
+    timer = setTimeout(function () {
+      timer = null;
+      // indicate();
+      // navShow();
+    }, 100);
+  }
+});
+
+//네이게이션 show by 쓰로틀링
+function navShow() {
+  const ul = document.querySelector("header ul");
+  ul.classList.add("show");
+  console.log("class added");
+}
+
+//네이게이션 show by 디바운싱
+function navShow2() {
+  let timer;
+  const ul = document.querySelector("header ul");
+  window.addEventListener("scroll", (event) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      ul.classList.add("show");
+    }, 100);
+  });
+}
+navShow2();
+
+// 네이게이션 hide by 디바운싱
+function indicaterhide() {
+  const ul = document.querySelector("header ul");
+  let timer;
+  window.addEventListener("scroll", (event) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      ul.classList.remove("show");
+    }, 1800);
+  });
+}
+indicaterhide();
+
+// 트랙패드 문제 해결하기
+// 디바운싱 하나로 합치기
