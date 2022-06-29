@@ -156,7 +156,8 @@ navShow2();
 function indicaterhide() {
   const ul = document.querySelector("header ul");
   let timer;
-  window.addEventListener("scroll", (event) => {
+  //scorll -> hide 카운팅
+  window.addEventListener("scroll", () => {
     if (timer) {
       clearTimeout(timer);
     }
@@ -164,8 +165,21 @@ function indicaterhide() {
       ul.classList.remove("show");
     }, 1800);
   });
+  // hover -> hide 카운팅 중지
+  ul.addEventListener("mouseenter", () => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+  });
+  // mouse leave -> hide counting
+  ul.addEventListener("mouseleave", () => {
+    timer = setTimeout(() => {
+      ul.classList.remove("show");
+    }, 1000);
+  });
 }
 indicaterhide();
 
 // 트랙패드 문제 해결하기
-// 디바운싱 하나로 합치기
+// 디바운싱 하나로 합치기 -> 오히려 가독성 떨어질듯
+//nav 위에서 스크롤 비정상
