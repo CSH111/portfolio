@@ -378,6 +378,7 @@ section#contact button {
   font-size: 2rem;
   margin: 0;
   padding: 10px;
+  transition: all 0.1s;
 }
 section#contact button:hover {
   color: var(--color-deep-coral);

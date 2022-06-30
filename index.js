@@ -119,7 +119,7 @@ function debounceIndicate() {
 debounceIndicate();
 
 //네이게이션 show by 디바운싱
-function navShow2() {
+function navShow() {
   let timer;
   const ul = document.querySelector("header ul");
   window.addEventListener("scroll", (event) => {
@@ -131,35 +131,7 @@ function navShow2() {
     }, 100);
   });
 }
-navShow2();
-
-// 네이게이션 hide by 디바운싱
-// function indicaterhide() {
-//   const ul = document.querySelector("header ul");
-//   let timer;
-//   //scorll -> hide 카운팅
-//   window.addEventListener("scroll", () => {
-//     if (timer) {
-//       clearTimeout(timer);
-//     }
-//     timer = setTimeout(() => {
-//       ul.classList.remove("show");
-//     }, 1800);
-//   });
-//   // hover -> hide 카운팅 중지
-//   ul.addEventListener("mouseenter", () => {
-//     if (timer) {
-//       clearTimeout(timer);
-//     }
-//   });
-//   // mouse leave -> hide counting
-//   ul.addEventListener("mouseleave", () => {
-//     timer = setTimeout(() => {
-//       ul.classList.remove("show");
-//     }, 1000);
-//   });
-// }
-// indicaterhide();
+navShow();
 
 function indicaterhide() {
   const ul = document.querySelector("header ul");
@@ -193,18 +165,14 @@ function indicaterhide() {
 }
 indicaterhide();
 
+//복사 버튼
+const copyBtns = document.querySelectorAll("#contact button");
+
+copyBtns.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    const text = document.querySelectorAll(".toCopy");
+    navigator.clipboard.writeText(text[index].innerText);
+  });
+});
 // 트랙패드 문제 해결하기
-// 디바운싱 하나로 합치기 -> 오히려 가독성 떨어질듯
 //nav 위에서 스크롤 비정상
-// 호버로 중지시킨 카운트 클릭시 카운팅 재개되버림.. true flase 상태값줘서 시도해보기 ㄱㄱ
-
-let AA = 10;
-let BB = 20;
-
-console.log(AA, BB);
-
-if ((AA = 10)) {
-  console.log("조건1 통과");
-} else if ((BB = 20)) {
-  console.log("조건2 통과");
-}
