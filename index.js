@@ -105,37 +105,18 @@ function indicate() {
   });
 }
 //인디케이터 디바운싱
-function indi() {
-  let timer_indi;
-  const ul = document.querySelector("header ul");
-  window.addEventListener("scroll", (event) => {
-    if (timer_indi) {
-      clearTimeout(timer_indi);
+function debounceIndicate() {
+  let timer;
+  window.addEventListener("scroll", () => {
+    if (timer) {
+      clearTimeout(timer);
     }
-    timer_indi = setTimeout(() => {
+    timer = setTimeout(() => {
       indicate();
     }, 50);
   });
 }
-indi();
-//쓰로틀링
-let timer;
-window.addEventListener("scroll", () => {
-  if (!timer) {
-    timer = setTimeout(function () {
-      timer = null;
-      // indicate();
-      // navShow();
-    }, 100);
-  }
-});
-
-//네이게이션 show by 쓰로틀링
-function navShow() {
-  const ul = document.querySelector("header ul");
-  ul.classList.add("show");
-  console.log("class added");
-}
+debounceIndicate();
 
 //네이게이션 show by 디바운싱
 function navShow2() {
@@ -153,29 +134,61 @@ function navShow2() {
 navShow2();
 
 // 네이게이션 hide by 디바운싱
+// function indicaterhide() {
+//   const ul = document.querySelector("header ul");
+//   let timer;
+//   //scorll -> hide 카운팅
+//   window.addEventListener("scroll", () => {
+//     if (timer) {
+//       clearTimeout(timer);
+//     }
+//     timer = setTimeout(() => {
+//       ul.classList.remove("show");
+//     }, 1800);
+//   });
+//   // hover -> hide 카운팅 중지
+//   ul.addEventListener("mouseenter", () => {
+//     if (timer) {
+//       clearTimeout(timer);
+//     }
+//   });
+//   // mouse leave -> hide counting
+//   ul.addEventListener("mouseleave", () => {
+//     timer = setTimeout(() => {
+//       ul.classList.remove("show");
+//     }, 1000);
+//   });
+// }
+// indicaterhide();
+
 function indicaterhide() {
   const ul = document.querySelector("header ul");
   let timer;
+  let mouseOn = false;
   //scorll -> hide 카운팅
   window.addEventListener("scroll", () => {
     if (timer) {
       clearTimeout(timer);
     }
-    timer = setTimeout(() => {
-      ul.classList.remove("show");
-    }, 1800);
+    if (!mouseOn) {
+      timer = setTimeout(() => {
+        ul.classList.remove("show");
+      }, 1800);
+    }
   });
   // hover -> hide 카운팅 중지
   ul.addEventListener("mouseenter", () => {
     if (timer) {
       clearTimeout(timer);
     }
+    mouseOn = true;
   });
   // mouse leave -> hide counting
   ul.addEventListener("mouseleave", () => {
     timer = setTimeout(() => {
       ul.classList.remove("show");
     }, 1000);
+    mouseOn = false;
   });
 }
 indicaterhide();
@@ -183,3 +196,15 @@ indicaterhide();
 // 트랙패드 문제 해결하기
 // 디바운싱 하나로 합치기 -> 오히려 가독성 떨어질듯
 //nav 위에서 스크롤 비정상
+// 호버로 중지시킨 카운트 클릭시 카운팅 재개되버림.. true flase 상태값줘서 시도해보기 ㄱㄱ
+
+let AA = 10;
+let BB = 20;
+
+console.log(AA, BB);
+
+if ((AA = 10)) {
+  console.log("조건1 통과");
+} else if ((BB = 20)) {
+  console.log("조건2 통과");
+}

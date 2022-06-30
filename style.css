@@ -347,14 +347,13 @@ section#contact .contents li {
   align-items: center;
   background-color: var(--color-light-gray);
   margin-bottom: 10px;
-  /* height: 90px; */
   max-width: 600px;
   border-radius: 10px;
 }
 section#contact li > div {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
+  height: 100%;
 }
 section#contact li > div > i {
   font-size: 2.5rem;
@@ -364,6 +363,10 @@ section#contact li > div > i {
 }
 section#contact li > div > div {
   width: 80%;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 section#contact li > div > div:last-child {
   word-break: break-all;
@@ -373,10 +376,15 @@ section#contact li > div h5 {
 }
 section#contact button {
   font-size: 2rem;
-  /* position: absolute; */
-  margin: 0 10px;
+  margin: 0;
+  padding: 10px;
 }
-
+section#contact button:hover {
+  color: var(--color-deep-coral);
+}
+section#contact button:active {
+  transform: scale(0.9);
+}
 @media screen and (max-width: 565px) {
   *::-webkit-scrollbar {
     display: none;
