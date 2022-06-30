@@ -331,6 +331,30 @@ section#projects .container i {
 }
 
 /*----------------------contact-------------------------- */
+
+section#contact .alert {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(62, 255, 104);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 15px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+section#contact .alert.show {
+  opacity: 0.8;
+  transform: translate(-50%, -50%) scale(1);
+}
 section#contact ul {
   display: flex;
   flex-direction: column;

@@ -169,9 +169,16 @@ indicaterhide();
 const copyBtns = document.querySelectorAll("#contact button");
 
 copyBtns.forEach((btn, index) => {
+  //복사
   btn.addEventListener("click", () => {
     const text = document.querySelectorAll(".toCopy");
-    navigator.clipboard.writeText(text[index].innerText);
+    navigator.clipboard.writeText(text[index].textContent);
+    //알림창
+    const alert = document.querySelector(".alert");
+    alert.classList.add("show");
+    setTimeout(() => {
+      alert.classList.remove("show");
+    }, 1000);
   });
 });
 // 트랙패드 문제 해결하기
