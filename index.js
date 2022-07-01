@@ -56,8 +56,9 @@ setTimeout(typing, 1000);
 
 downArrow.addEventListener("click", scroll);
 function scroll(event) {
+  const about = document.querySelector("#about");
   window.scrollBy({
-    top: event.target.parentNode.offsetHeight,
+    top: about.getBoundingClientRect().top,
     left: 0,
     behavior: "smooth",
   });
