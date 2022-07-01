@@ -53,39 +53,41 @@ function reTyping() {
 setTimeout(typing, 1000);
 
 //페이지 이동 - 1페이지 버튼
-
-downArrow.addEventListener("click", scroll);
-function scroll(event) {
-  const about = document.querySelector("#about");
-  window.scrollBy({
-    top: about.getBoundingClientRect().top,
-    left: 0,
-    behavior: "smooth",
-  });
-}
-
+const navTags = document.querySelectorAll("nav a");
+downArrow.addEventListener("click", () => {
+  navTags[1].click();
+});
 //페이지 이동 - 스크롤
-
+// disable();
+let timer;
 const sections = document.querySelectorAll("section");
-sections.forEach((item, index) => {
-  item.addEventListener("wheel", function (event) {
-    event.preventDefault();
 
-    if (event.wheelDelta < 0 && index !== sections.length - 1) {
-      window.scrollTo({
-        top:
-          window.scrollY +
-          sections[index].nextElementSibling.getBoundingClientRect().top,
-      });
-    } else if (event.wheelDelta > 0 && index !== 0) {
-      window.scrollTo({
-        top:
-          window.scrollY +
-          sections[index].previousElementSibling.getBoundingClientRect().top,
-      });
+sections.forEach((item, index) => {
+  item.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    if (!timer) {
+      if (event.wheelDelta < 0 && sections[index + 1]) {
+        navTags[index + 1].click();
+      } else if (event.wheelDelta > 0 && sections[index - 1]) {
+        navTags[index - 1].click();
+      }
+      timer = setTimeout(() => {
+        timer = null;
+      }, 1000);
+      // timer = 1;
     }
   });
 });
+
+// let timer;
+// document.addEventListener("wheel", () => {
+//   if (!timer) {
+//     console.log("gg");
+//     timer = setTimeout(() => {
+//       timer = null;
+//     }, 1000);
+//   }
+// });
 
 //인디케이터
 function indicate() {
@@ -121,6 +123,7 @@ debounceIndicate();
 
 //네이게이션 show by 디바운싱
 function navShow() {
+  const sections = document.querySelectorAll("section");
   let timer;
   const ul = document.querySelector("header ul");
   window.addEventListener("scroll", (event) => {
@@ -134,7 +137,7 @@ function navShow() {
 }
 navShow();
 
-function indicaterhide() {
+function navHide() {
   const ul = document.querySelector("header ul");
   let timer;
   let mouseOn = false;
@@ -149,22 +152,28 @@ function indicaterhide() {
       }, 1800);
     }
   });
-  // hover -> hide 카운팅 중지
-  ul.addEventListener("mouseenter", () => {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    mouseOn = true;
-  });
-  // mouse leave -> hide counting
-  ul.addEventListener("mouseleave", () => {
-    timer = setTimeout(() => {
-      ul.classList.remove("show");
-    }, 1000);
-    mouseOn = false;
-  });
+  //PC일 때만 Hover
+  if (matchMedia("screen and (min-width: 500px)").matches) {
+    // hover -> hide 카운팅 중지
+    ul.addEventListener("mouseenter", () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      mouseOn = true;
+    });
+    // mouse leave -> hide counting
+    ul.addEventListener("mouseleave", () => {
+      timer = setTimeout(() => {
+        ul.classList.remove("show");
+      }, 1000);
+      mouseOn = false;
+    });
+  }
+  window.onresize = function () {
+    document.location.reload();
+  };
 }
-indicaterhide();
+navHide();
 
 //복사 버튼
 const copyBtns = document.querySelectorAll("#contact button");
@@ -184,3 +193,19 @@ copyBtns.forEach((btn, index) => {
 });
 // 트랙패드 문제 해결하기
 //nav 위에서 스크롤 비정상
+
+function preventScroll(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+}
+function disable() {
+  document.addEventListener("wheel", preventScroll, { passive: false });
+}
+function enable() {
+  document.removeEventListener("wheel", preventScroll, { passive: false });
+}
+
+// document.addEventListener("wheel", () => {
+//   console.log("ff");
+// });
