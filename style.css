@@ -116,11 +116,10 @@ header nav ul.show {
   opacity: 1;
   pointer-events: initial;
 }
-header nav ul li {
-}
-header nav ul li:hover span:nth-child(n) {
+
+/* header nav ul li:hover span:nth-child(n) {
   opacity: 1;
-}
+} */
 header nav ul li a {
   font-size: 1.2rem;
   display: flex;
@@ -142,6 +141,17 @@ header nav ul li a span {
   align-items: center;
   border-radius: 3px;
 }
+header nav ul li.active span {
+  opacity: 1;
+  left: -20px;
+}
+@media screen and (min-width: 565px) {
+  header nav ul li:hover span {
+    opacity: 1;
+    left: -20px;
+  }
+}
+
 header nav ul li a span::after {
   content: "";
   border: solid;
@@ -152,11 +162,7 @@ header nav ul li a span::after {
   right: 0;
   transform: translate(100%, 0);
 }
-header nav ul li.active span,
-header nav ul li:hover span {
-  opacity: 1;
-  left: -20px;
-}
+
 header nav ul li a::after {
   z-index: 100;
   transition: all 0.3s;

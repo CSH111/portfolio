@@ -54,6 +54,7 @@ setTimeout(typing, 1000);
 
 //페이지 이동 - 1페이지 버튼
 const navTags = document.querySelectorAll("nav a");
+
 downArrow.addEventListener("click", () => {
   navTags[1].click();
 });
@@ -78,16 +79,6 @@ sections.forEach((item, index) => {
     }
   });
 });
-
-// let timer;
-// document.addEventListener("wheel", () => {
-//   if (!timer) {
-//     console.log("gg");
-//     timer = setTimeout(() => {
-//       timer = null;
-//     }, 1000);
-//   }
-// });
 
 //인디케이터
 function indicate() {
@@ -137,6 +128,7 @@ function navShow() {
 }
 navShow();
 
+//네이게이션 hide
 function navHide() {
   const ul = document.querySelector("header ul");
   let timer;
@@ -149,10 +141,10 @@ function navHide() {
     if (!mouseOn) {
       timer = setTimeout(() => {
         ul.classList.remove("show");
-      }, 1800);
+      }, 2000);
     }
   });
-  //PC일 때만 Hover
+  //PC일 때만
   if (matchMedia("screen and (min-width: 500px)").matches) {
     // hover -> hide 카운팅 중지
     ul.addEventListener("mouseenter", () => {
@@ -191,8 +183,6 @@ copyBtns.forEach((btn, index) => {
     }, 1000);
   });
 });
-// 트랙패드 문제 해결하기
-//nav 위에서 스크롤 비정상
 
 function preventScroll(e) {
   e.preventDefault();
@@ -205,7 +195,7 @@ function disable() {
 function enable() {
   document.removeEventListener("wheel", preventScroll, { passive: false });
 }
-
-// document.addEventListener("wheel", () => {
-//   console.log("ff");
-// });
+disable();
+// 트랙패드 문제 해결하기
+//nav 위에서 스크롤 비정상
+//스크롤 시 디바운싱으로 몇초간 안되게 될거같은데 왜안댐..?
