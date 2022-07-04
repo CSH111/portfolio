@@ -5,6 +5,7 @@
   --color-deep-coral: rgb(252, 106, 53);
   --color-warm-white: rgb(255, 255, 255);
   --color-light-gray: rgb(235, 235, 235);
+  --color-light-green: rgb(52, 204, 85);
 }
 html {
   scroll-behavior: smooth;
@@ -339,21 +340,27 @@ section#projects .container .contents ul li > div:hover .hoverBox {
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.633);
+  background-color: rgba(0, 0, 0, 0.684);
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   transition: all 0.3s;
   opacity: 0;
+  padding: 0 10%;
 }
-.hoverBox a {
-  color: white;
-  font-size: 2rem;
-  transition: all 0.2s;
+section#projects .hoverBox a {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 35px;
+  color: var(--color-deep-coral);
+  transition: all 0.3s;
 }
-.hoverBox a:hover {
-  color: rgb(61, 216, 133);
+section#projects .hoverBox a:hover {
+  background-color: var(--color-light-gray);
+  background-color: rgba(128, 128, 128, 0.61);
+  color: var(--color-light-green);
 }
+
 section#projects .container .contents ul li div img {
   width: 100%;
   height: 100%;
@@ -363,7 +370,8 @@ section#projects .container .contents ul li div img {
 section#projects .container .contents ul li ul {
   display: flex;
 }
-section#projects .container i {
+
+section#projects .container ul li ul li i {
   margin: 5px;
   font-size: 35px;
   display: block;
@@ -375,7 +383,7 @@ section#projects .container i {
 section#contact .alert {
   width: 100px;
   height: 100px;
-  background-color: rgb(52, 204, 85);
+  background-color: var(--color-light-green);
   position: fixed;
   left: 50%;
   top: 50%;
