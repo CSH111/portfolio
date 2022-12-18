@@ -12,8 +12,20 @@ html {
   overflow: scroll;
   scroll-snap-type: y mandatory;
 }
-
-body::after {
+.bg {
+  /* background-color: black; */
+  background: url("./images/bg.svg") center / cover;
+  z-index: -10;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+/* body:after {
   content: "";
   position: fixed;
   top: 0;
@@ -23,7 +35,7 @@ body::after {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("./images/background.jpg") center / cover;
   z-index: -1;
-}
+} */
 * {
   margin: 0;
   padding: 0;
@@ -579,4 +591,16 @@ section#contact button:active {
   }
 
   /* --------------projects--------------- */
+}
+
+@keyframes move_wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.55);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
 }
