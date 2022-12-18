@@ -196,8 +196,8 @@ disable();
 
 // 프로젝트 x scroll이동
 
-const leftBtn = document.querySelector(".project-nav.left");
-const rightBtn = document.querySelector(".project-nav.right");
+const leftBtns = document.querySelectorAll(".project-nav.left");
+const rightBtns = document.querySelectorAll(".project-nav.right");
 const findUlToScroll = (target) => {
   return target.parentElement.previousElementSibling.firstElementChild;
 };
@@ -217,5 +217,9 @@ const handleRightNavBtnClick = (e) => {
     behavior: "smooth",
   });
 };
-leftBtn.addEventListener("click", handleLeftNavBtnClick);
-rightBtn.addEventListener("click", handleRightNavBtnClick);
+leftBtns.forEach((btn) => {
+  btn.addEventListener("click", handleLeftNavBtnClick);
+});
+rightBtns.forEach((btn) => {
+  btn.addEventListener("click", handleRightNavBtnClick);
+});
