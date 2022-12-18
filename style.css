@@ -4,7 +4,7 @@
   --border--radius: 15px;
   --color-deep-coral: rgb(252, 106, 53);
   --color-warm-white: rgb(255, 255, 255);
-  --color-light-gray: rgb(235, 235, 235);
+  --color-light-gray: rgb(226, 226, 226);
   --color-light-green: rgb(52, 204, 85);
 }
 html {
@@ -12,8 +12,7 @@ html {
   overflow: scroll;
   scroll-snap-type: y mandatory;
 }
-body {
-}
+
 body::after {
   content: "";
   position: fixed;
@@ -92,11 +91,8 @@ section .container .title h2 {
 }
 /* ----------------common---------------------- */
 
-/* nav */
+/* -----------------------------헤더-nav------------------- */
 
-/* -----------------------------헤더------------------- */
-header {
-}
 header nav {
   position: fixed;
   z-index: 10;
@@ -123,7 +119,6 @@ header nav ul li a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 120px;
   height: 40px;
   position: relative;
 }
@@ -198,7 +193,7 @@ button.down.show {
   }
 }
 
-/* ---------------------------헤더------------------- */
+/* ---------------------------헤더-nav------------------- */
 
 /* ---------------home------------------ */
 section#home {
@@ -240,6 +235,7 @@ section#about .container .contents {
   display: flex;
   justify-content: space-between;
 }
+
 section#about .container .contents .left {
   /* border: solid black 3px; */
   width: 47%;
@@ -254,9 +250,12 @@ section#about .container .contents .left {
 section#about .container .contents .right {
   width: 47%;
 }
+section#about .container .contents .right > * {
+  margin-bottom: 1rem;
+}
 section#about .container p {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .social {
@@ -277,44 +276,60 @@ section#skills .container .contents {
   display: flex;
   flex-direction: column;
 }
-section#skills .container .contents ul#icons {
+/* section#skills .container .contents ul#icons {
   display: flex;
-}
-section#skills .container .contents ul#icons > * {
+  flex-wrap: wrap;
+} */
+/* section#skills .container .contents ul#icons > * {
   margin-right: 10px;
+} */
+section#skills .container .contents > div {
+  position: relative;
 }
-
-section#skills .container .contents ul#skillLists {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: repeat(3, 1fr);
-  overflow-x: scroll;
-  grid-auto-flow: column;
-  justify-items: center;
+section#skills .container .contents > div > hr {
+  margin-bottom: 20px;
 }
-section#skills .container .contents ul#skillLists li {
-  display: inline-block;
-  padding: 15px;
-  width: 210px;
-  min-height: 210px;
+section#skills .container .contents > div > h4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(10%, -55%);
+  background-color: white;
+  padding: 0 10px;
+  color: rgb(46, 46, 46);
+}
+section#skills .container .contents > div > ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+section#skills .container .contents > div > ul > li {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
   margin: 10px;
   background-color: var(--color-light-gray);
-  border-radius: var(--border--radius);
+  border-radius: 10px;
 }
-section#skills .container .contents ul#skillLists li > * {
-  margin-bottom: 10px;
+section#skills .container .contents > div > ul > li > img {
+  width: 30px;
+}
+section#skills .container .contents > div > ul > li > h5 {
+  font-size: 16px;
+  margin-left: 10px;
 }
 /* -----------skills--------------- */
 
 /* ------------------projects------------------------- */
-section#projects .container .contents {
+
+section.projects .container .contents {
   border-radius: var(--border--radius);
 }
-section#projects .container .contents > ul {
+section.projects .container .contents > ul {
   display: flex;
   overflow-x: scroll;
 }
-section#projects .container .contents > ul > li {
+section.projects .container .contents > ul > li {
   flex: none;
   display: flex;
   flex-direction: column;
@@ -322,18 +337,42 @@ section#projects .container .contents > ul > li {
   width: 350px;
   height: 450px;
   background-color: var(--color-light-gray);
-  margin-right: 30px;
   border-radius: var(--border--radius);
+  box-shadow: 3px 3px 5px 1px gray;
+  margin: 6px 3px;
+  margin-right: 15px;
 }
-section#projects .container .contents ul li > * {
+
+section.projects .container .contents > ul > li:last-child {
+  margin-right: 10px;
+}
+section.projects .container .contents > ul > li > *:not(:last-child) {
   margin-bottom: 10px;
 }
-section#projects .container .contents ul li > div {
+section.projects .container .contents > ul > li > div {
   height: 50%;
   position: relative;
 }
-section#projects .container .contents ul li > div:hover .hoverBox {
+section.projects .container .contents > ul > li p {
+  flex: 1;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+section.projects .container .contents > ul > li > div:hover .hoverBox {
   opacity: 1;
+}
+
+section.projects .container .contents ul li .project-icons {
+  display: flex;
+  flex-wrap: wrap;
+  color: #badcff;
+}
+section.projects .container .contents ul li .project-icons li {
+  margin-right: 3px;
+}
+section.projects .container .contents ul li .project-icons > li img {
+  border-radius: 5px;
 }
 .hoverBox {
   position: absolute;
@@ -348,34 +387,57 @@ section#projects .container .contents ul li > div:hover .hoverBox {
   opacity: 0;
   padding: 0 10%;
 }
-section#projects .hoverBox a {
+section.projects .hoverBox a {
   padding: 10px;
   border-radius: 5px;
   font-size: 35px;
   color: var(--color-deep-coral);
   transition: all 0.3s;
 }
-section#projects .hoverBox a:hover {
+section.projects .hoverBox a:hover {
   background-color: var(--color-light-gray);
   background-color: rgba(128, 128, 128, 0.61);
   color: var(--color-light-green);
 }
 
-section#projects .container .contents ul li div img {
+section.projects .container .contents ul li div img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
-section#projects .container .contents ul li ul {
+section.projects .container .contents ul li ul {
   display: flex;
 }
 
-section#projects .container ul li ul li i {
+section.projects .container ul li ul li i {
   margin: 5px;
   font-size: 35px;
   display: block;
   color: var(--color-deep-coral);
+}
+
+section.projects .container .button-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+section.projects .container .button-box .project-nav {
+  font-size: 30px;
+  border-radius: 5px;
+  padding: 3px 6px;
+  transition: all 0.15s;
+  /* position: absolute; */
+  flex: 1;
+}
+
+section.projects .container .button-box .project-nav:hover {
+  background-color: rgba(169, 169, 169, 0.504);
+}
+section.projects .container .button-box .project-nav.left {
+  /* top: 50%;
+  left: 0; */
 }
 
 /*----------------------contact-------------------------- */
@@ -502,17 +564,17 @@ section#contact button:active {
   /* -----------------about------------ */
 
   /* --------------projects--------------- */
-  section#projects .container .contents ul {
+  section.projects .container .contents ul {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
     justify-content: flex-start;
   }
-  section#projects section#projects .container .contents > ul > li {
+  section.projects section.projects .container .contents > ul > li {
     width: 100%;
     margin: 0;
   }
-  section#projects ul > li {
+  section.projects ul > li {
     flex: none;
   }
 

@@ -85,10 +85,7 @@ function indicate() {
   const sections = document.querySelectorAll("section");
   const lists = document.querySelectorAll("nav ul li");
   sections.forEach((section) => {
-    if (
-      section.getBoundingClientRect().top < 100 &&
-      section.getBoundingClientRect().top > -300
-    ) {
+    if (section.getBoundingClientRect().top < 100 && section.getBoundingClientRect().top > -300) {
       lists.forEach((list) => {
         list.classList.remove("active");
         if (section.id === list.dataset.indicate) {
@@ -161,9 +158,6 @@ function navHide() {
       mouseOn = false;
     });
   }
-  window.onresize = function () {
-    document.location.reload();
-  };
 }
 navHide();
 
@@ -199,3 +193,29 @@ disable();
 // 트랙패드 문제 해결하기
 //nav 위에서 스크롤 비정상
 //스크롤 시 디바운싱으로 몇초간 안되게 될거같은데 왜안댐..?
+
+// 프로젝트 x scroll이동
+
+const leftBtn = document.querySelector(".project-nav.left");
+const rightBtn = document.querySelector(".project-nav.right");
+const findUlToScroll = (target) => {
+  return target.parentElement.previousElementSibling.firstElementChild;
+};
+const handleLeftNavBtnClick = (e) => {
+  const ul = findUlToScroll(e.target);
+  ul.scrollBy({
+    top: 0,
+    left: -350,
+    behavior: "smooth",
+  });
+};
+const handleRightNavBtnClick = (e) => {
+  const ul = findUlToScroll(e.target);
+  ul.scrollBy({
+    top: 0,
+    left: 350,
+    behavior: "smooth",
+  });
+};
+leftBtn.addEventListener("click", handleLeftNavBtnClick);
+rightBtn.addEventListener("click", handleRightNavBtnClick);
