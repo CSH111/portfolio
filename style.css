@@ -6,6 +6,9 @@
   --color-warm-white: rgb(255, 255, 255);
   --color-light-gray: rgb(226, 226, 226);
   --color-light-green: rgb(52, 204, 85);
+  --color-indicator-dot-active: #fdd835;
+  --color-indicator-dot-default: #b5b5b5;
+  --color-indicator-bg: #fdd835;
 }
 html {
   scroll-behavior: smooth;
@@ -25,17 +28,6 @@ html {
   top: 0;
   margin: auto;
 }
-/* body:after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("./images/background.jpg") center / cover;
-  z-index: -1;
-} */
 * {
   margin: 0;
   padding: 0;
@@ -54,8 +46,7 @@ a:visited {
 li {
   list-style: none;
 }
-h1 {
-}
+
 h2 {
   font-size: 3rem;
 }
@@ -99,8 +90,7 @@ section .container .title {
 section .container .title h4 {
   color: var(--color-deep-coral);
 }
-section .container .title h2 {
-}
+
 /* ----------------common---------------------- */
 
 /* -----------------------------헤더-nav------------------- */
@@ -115,7 +105,7 @@ header nav ul {
   transition: all 0.4s;
   display: inline-flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: black;
   transform: translate(50%, 0);
   opacity: 0;
   pointer-events: none;
@@ -135,7 +125,7 @@ header nav ul li a {
   position: relative;
 }
 header nav ul li a span {
-  background-color: rgb(14, 118, 118);
+  background-color: var(--color-indicator-bg);
   opacity: 0;
   transition: all 0.2s;
   padding: 5px 10px;
@@ -161,7 +151,7 @@ header nav ul li a span::after {
   content: "";
   border: solid;
   border-width: 5px 5px 5px 7px;
-  border-color: transparent transparent transparent rgb(14, 118, 118);
+  border-color: transparent transparent transparent var(--color-indicator-bg);
 
   position: absolute;
   right: 0;
@@ -174,12 +164,12 @@ header nav ul li a::after {
   content: "";
   width: 10px;
   height: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-indicator-dot-default);
   border-radius: 50%;
 }
 
 header nav ul li.active a::after {
-  background-color: rgb(236, 160, 67);
+  background-color: var(--color-indicator-dot-active);
   transform: scale(1.4);
 }
 button.down {
