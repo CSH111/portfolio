@@ -190,11 +190,6 @@ function enable() {
   document.removeEventListener("wheel", preventScroll, { passive: false });
 }
 disable();
-// 트랙패드 문제 해결하기
-//nav 위에서 스크롤 비정상
-//스크롤 시 디바운싱으로 몇초간 안되게 될거같은데 왜안댐..?
-
-// 프로젝트 x scroll이동
 
 const leftBtns = document.querySelectorAll(".project-nav.left");
 const rightBtns = document.querySelectorAll(".project-nav.right");
@@ -223,3 +218,24 @@ leftBtns.forEach((btn) => {
 rightBtns.forEach((btn) => {
   btn.addEventListener("click", handleRightNavBtnClick);
 });
+
+//배경 이펙트
+const startStarEffect = () => {
+  const amount = 15;
+  const bg = document.querySelector(".bg");
+
+  for (let i = 0; i <= amount; i++) {
+    const shootingStar = document.createElement("i");
+    const width = 1 + Math.random() * 4;
+    const positionX = Math.random() * window.innerWidth * 1.2;
+    const delay = Math.random() * 15;
+    const duration = 20 + Math.random() * 5;
+
+    shootingStar.style.width = `${0.2 + width}px`;
+    shootingStar.style.left = `${positionX}px`;
+    shootingStar.style.animationDelay = `${delay}s`;
+    shootingStar.style.animationDuration = `${duration}s`;
+    bg.appendChild(shootingStar);
+  }
+};
+startStarEffect();
