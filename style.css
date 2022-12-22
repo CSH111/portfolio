@@ -16,8 +16,9 @@ html {
   scroll-snap-type: y mandatory;
 }
 .bg {
-  /* background-color: black; */
-  background: url("./images/bg.svg") center / cover;
+  background-color: black;
+  background: linear-gradient(#000000, #140088, #540085, #e66465, #e5de91);
+  /* background: url("./images/bg.svg") center / cover; */
   z-index: -10;
   width: 100vw;
   height: 100vh;
@@ -46,7 +47,7 @@ html {
   background: linear-gradient(transparent, #9710ff);
 }
 .bg i:nth-child(3n + 3) {
-  background: linear-gradient(transparent, #ffb508);
+  background: linear-gradient(transparent, #ffd208);
 }
 
 @keyframes shootingStar {
@@ -67,6 +68,60 @@ html {
     transform: rotate(60deg) translateY(calc(200vh));
   }
 }
+
+.bg .wave {
+  position: absolute;
+  width: 4000px;
+  height: 100px;
+  opacity: 0.95;
+  transform: translate(0, 0);
+}
+
+.bg .wave-1 {
+  background: url("./images/wave-1.svg");
+  bottom: 10px;
+  animation: wave 2s linear infinite, floating 5s ease infinite;
+  /* 	  swell 8s ease -1.25s infinite; */
+}
+
+.bg .wave-2 {
+  background: url("./images/wave-2.svg");
+  bottom: -20px;
+  animation: wave 3s linear infinite;
+  animation-delay: -0.5s;
+  /* 	  swell 8s ease -1.25s infinite; */
+}
+
+.bg .wave-3 {
+  background: url("./images/wave-3.svg");
+  bottom: -50px;
+  /* animation-delay: 4s; */
+  animation: wave 8s linear infinite;
+  /* 	  swell 8s ease -1.25s infinite; */
+  /* animation-delay: -4s; */
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -800px;
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 20%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -351,6 +406,7 @@ section#skills .container .contents > div > ul > li {
   margin: 10px;
   background-color: var(--color-light-gray);
   border-radius: 10px;
+  box-shadow: 2px 2px 3px 1px gray;
 }
 section#skills .container .contents > div > ul > li > img {
   width: 30px;
@@ -511,16 +567,13 @@ section#contact ul {
   flex-direction: column;
 }
 
-section#contact ul li {
-  background-color: antiquewhite;
-}
-
 section#contact .contents li {
   padding: 10px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-light-gray);
+  box-shadow: 2px 2px 3px 1px gray;
   margin-bottom: 10px;
   max-width: 600px;
   border-radius: 10px;
@@ -620,16 +673,4 @@ section#contact button:active {
   }
 
   /* --------------projects--------------- */
-}
-
-@keyframes move_wave {
-  0% {
-    transform: translateX(0) translateZ(0) scaleY(1);
-  }
-  50% {
-    transform: translateX(-25%) translateZ(0) scaleY(0.55);
-  }
-  100% {
-    transform: translateX(-50%) translateZ(0) scaleY(1);
-  }
 }
