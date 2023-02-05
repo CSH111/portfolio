@@ -470,6 +470,7 @@ section.projects .container .contents ul li .project-icons li {
 }
 section.projects .container .contents ul li .project-icons > li img {
   border-radius: 5px;
+  height: 23px;
 }
 .hoverBox {
   position: absolute;
