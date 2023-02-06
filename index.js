@@ -1,13 +1,11 @@
 const typingBlock = document.querySelector("#home .container span");
 const downArrow = document.querySelector(".down");
 
-// 커서 깜빡임
 function blink() {
   setInterval(() => typingBlock.classList.toggle("blinkOn"), 300);
 }
 blink();
 
-// 타이핑 효과
 const welcomeMsg = [
   "안녕하세요.",
   "프론트엔드\u00a0개발자\n조성호입니다.",
@@ -28,6 +26,7 @@ function typing() {
     downArrow.classList.add("show"); // 버튼생성
   }
 }
+
 function DeleteTyping() {
   const splitToDel = typingBlock.innerText.split("");
   if (splitToDel.length > 0) {
@@ -38,6 +37,7 @@ function DeleteTyping() {
     nextType();
   }
 }
+
 function nextType() {
   msgIndex += 1;
   splitedMsg = welcomeMsg[msgIndex].split("");
@@ -58,44 +58,66 @@ const navTags = document.querySelectorAll("nav a");
 downArrow.addEventListener("click", () => {
   navTags[1].click();
 });
-//페이지 이동 - 스크롤
-// disable();
-let timer;
-const sections = document.querySelectorAll("section");
 
-sections.forEach((item, index) => {
-  item.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    if (!timer) {
-      if (event.wheelDelta < 0 && sections[index + 1]) {
-        navTags[index + 1].click();
-      } else if (event.wheelDelta > 0 && sections[index - 1]) {
-        navTags[index - 1].click();
-      }
-      timer = setTimeout(() => {
-        timer = null;
-      }, 1000);
-      // timer = 1;
-    }
+function navClickHandler(e) {
+  e.preventDefault();
+}
+function pauseNavClickEvent() {
+  navTags.forEach((tag) => {
+    tag.addEventListener("click", navClickHandler);
   });
-});
+}
+function resumeNavClickEvent() {
+  navTags.forEach((tag) => {
+    tag.removeEventListener("click", navClickHandler);
+  });
+}
 
-//인디케이터
+function throttle(func, timeout = 300, timerRef) {
+  if (timerRef.id) return;
+  func();
+  timerRef.id = setTimeout(() => {
+    timerRef.id = null;
+  }, timeout);
+}
+
+function scrollFullPage(event, sections, index) {
+  if (event.wheelDelta < 0 && sections[index + 1]) {
+    navTags[index + 1].click();
+  } else if (event.wheelDelta > 0 && sections[index - 1]) {
+    navTags[index - 1].click();
+  }
+  pauseNavClickEvent();
+}
+
+function listenScrolling() {
+  const sections = document.querySelectorAll("section");
+  const timerRef = { id: null };
+  sections.forEach((item, index) => {
+    item.addEventListener("wheel", (event) => {
+      throttle(() => scrollFullPage(event, sections, index), 200, timerRef);
+    });
+  });
+}
+
+listenScrolling();
+
 function indicate() {
   const sections = document.querySelectorAll("section");
-  const lists = document.querySelectorAll("nav ul li");
+  const navItems = document.querySelectorAll("nav ul li");
   sections.forEach((section) => {
-    if (section.getBoundingClientRect().top < 100 && section.getBoundingClientRect().top > -300) {
-      lists.forEach((list) => {
-        list.classList.remove("active");
-        if (section.id === list.dataset.indicate) {
-          list.classList.add("active");
+    if (section.getBoundingClientRect().top < 100 && section.getBoundingClientRect().top > -100) {
+      navItems.forEach((navItem) => {
+        navItem.classList.remove("active");
+        if (section.id === navItem.dataset.indicate) {
+          navItem.classList.add("active");
+          resumeNavClickEvent();
         }
       });
     }
   });
 }
-//인디케이터 디바운싱
+
 function debounceIndicate() {
   let timer;
   window.addEventListener("scroll", () => {
@@ -111,10 +133,9 @@ debounceIndicate();
 
 //네이게이션 show by 디바운싱
 function navShow() {
-  const sections = document.querySelectorAll("section");
   let timer;
   const ul = document.querySelector("header ul");
-  window.addEventListener("scroll", (event) => {
+  window.addEventListener("scroll", () => {
     if (timer) {
       clearTimeout(timer);
     }
@@ -125,12 +146,10 @@ function navShow() {
 }
 navShow();
 
-//네이게이션 hide
 function navHide() {
   const ul = document.querySelector("header ul");
   let timer;
   let mouseOn = false;
-  //scorll -> hide 카운팅
   window.addEventListener("scroll", () => {
     if (timer) {
       clearTimeout(timer);
@@ -141,16 +160,14 @@ function navHide() {
       }, 2000);
     }
   });
-  //PC일 때만
+
   if (matchMedia("screen and (min-width: 500px)").matches) {
-    // hover -> hide 카운팅 중지
     ul.addEventListener("mouseenter", () => {
       if (timer) {
         clearTimeout(timer);
       }
       mouseOn = true;
     });
-    // mouse leave -> hide counting
     ul.addEventListener("mouseleave", () => {
       timer = setTimeout(() => {
         ul.classList.remove("show");
@@ -161,15 +178,12 @@ function navHide() {
 }
 navHide();
 
-//복사 버튼
 const copyBtns = document.querySelectorAll("#contact button");
 
 copyBtns.forEach((btn, index) => {
-  //복사
   btn.addEventListener("click", () => {
     const text = document.querySelectorAll(".toCopy");
     navigator.clipboard.writeText(text[index].textContent);
-    //알림창
     const alert = document.querySelector(".alert");
     alert.classList.add("show");
     setTimeout(() => {
@@ -183,13 +197,14 @@ function preventScroll(e) {
   e.stopPropagation();
   return false;
 }
-function disable() {
+
+function disableScrollSnap() {
   document.addEventListener("wheel", preventScroll, { passive: false });
 }
 function enable() {
   document.removeEventListener("wheel", preventScroll, { passive: false });
 }
-disable();
+disableScrollSnap();
 
 const leftBtns = document.querySelectorAll(".project-nav.left");
 const rightBtns = document.querySelectorAll(".project-nav.right");
@@ -219,8 +234,7 @@ rightBtns.forEach((btn) => {
   btn.addEventListener("click", handleRightNavBtnClick);
 });
 
-//배경 이펙트
-const startStarEffect = () => {
+const startShootingStarAnimation = () => {
   const amount = 15;
   const bg = document.querySelector(".bg");
 
@@ -238,4 +252,4 @@ const startStarEffect = () => {
     bg.appendChild(shootingStar);
   }
 };
-startStarEffect();
+startShootingStarAnimation();
